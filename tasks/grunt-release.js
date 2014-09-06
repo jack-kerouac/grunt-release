@@ -144,6 +144,20 @@ module.exports = function(grunt){
 
     function githubRelease(){
       var deferred = Q.defer();
+
+      var username, password;
+      if((!!options.github.usernameVar) && (!!options.github.passwordVar)) {
+        username = process.env[options.github.usernameVar];
+        password = process.env[options.github.passwordVar];
+      }
+      else if(!!options.github.accessTokenVar) {
+        username = process.env[options.github.accessTokenVar];
+        password = '';
+      }
+      else {
+        throw 'either github.usernameVar and github.passwordVar or github.accessTokenVar must be set';
+      }
+
       if (nowrite){ 
         success();
         return;
@@ -151,7 +165,7 @@ module.exports = function(grunt){
 
       request
         .post('https://api.github.com/repos/' + options.github.repo + '/releases')
-        .auth(process.env[options.github.usernameVar], process.env[options.github.passwordVar])
+        .auth(username, password)
         .set('Accept', 'application/vnd.github.manifold-preview')
         .set('User-Agent', 'grunt-release')
         .send({"tag_name": tagName, "name": tagMessage})

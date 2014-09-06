@@ -131,6 +131,8 @@ The following are all the release steps, you can disable any you need to:
         repo: 'geddski/grunt-release', //put your user/repo here
         usernameVar: 'GITHUB_USERNAME', //ENVIRONMENT VARIABLE that contains Github username 
         passwordVar: 'GITHUB_PASSWORD' //ENVIRONMENT VARIABLE that contains Github password
+        // or
+        accessTokenVar: 'GITHUB_ACCESS_TOKEN' //ENVIRONMENT VARIABLE that contains Github access token
       }
     }
   }
@@ -139,7 +141,7 @@ The following are all the release steps, you can disable any you need to:
 ### Notes on Github Releases:
 1. Yes, you have to use environment variables. I would be a terrible person if I let you check in your username and password into your source code.
 2. The [Github Releases API](http://developer.github.com/v3/repos/releases/) is still unstable and may change in the future.
-3. You can use an [access token](https://help.github.com/articles/creating-an-access-token-for-command-line-use) if you'd rather.
+3. Either use username and password in environment variables specified by `usernameVar` and `passwordVar` or use an [access token](https://help.github.com/articles/creating-an-access-token-for-command-line-use) in environment variable specified by `accessTokenVar` if you'd rather.
 
 For node libs, leave `file` option blank as it will default to `package.json`. For Bower components, set it to `bower.json`.
 
