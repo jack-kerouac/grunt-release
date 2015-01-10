@@ -1,8 +1,10 @@
 module.exports = function(grunt) {
+  'use strict';
+
   grunt.initConfig({
-    
+
     clean: {
-      test: 'test/fixtures/_component.json'
+      test: 'test/fixtures/_*.json'
     },
     nodeunit: {
       tests: 'test/release_test.js'
@@ -11,6 +13,8 @@ module.exports = function(grunt) {
       options: {
         bump: true,
         file: 'package.json',
+        changelog: 'test/fixtures/_CHANGELOG.md',
+        changelogText: '### <%= version %>\n',
         add: true,
         commit: true,
         tag: true,
@@ -27,8 +31,16 @@ module.exports = function(grunt) {
     },
     setup: {
       test: {
-        src: 'test/fixtures/component.json',
-        dest: 'test/fixtures/_component.json'
+        files: [{
+          src: 'test/fixtures/component.json',
+          dest: 'test/fixtures/_component.json'
+        },{
+          src: 'test/fixtures/bower.json',
+          dest: 'test/fixtures/_bower.json'
+        },{
+          src: 'test/fixtures/CHANGELOG.md',
+          dest: 'test/fixtures/_CHANGELOG.md'
+        }]
       }
     }
   });
@@ -50,6 +62,8 @@ module.exports = function(grunt) {
       grunt.file.copy(f.src, f.dest);
     });
     grunt.config.set('release.options.file', 'test/fixtures/_component.json');
+    grunt.config.set('release.options.changelog', 'test/fixtures/_CHANGELOG.md');
+    grunt.config.set('release.options.changelogText', '### <%= version %>\n');
     grunt.config.set('release.options.add', false);
     grunt.config.set('release.options.commit', false);
     grunt.config.set('release.options.tag', false);
@@ -57,5 +71,6 @@ module.exports = function(grunt) {
     grunt.config.set('release.options.pushTags', false);
     grunt.config.set('release.options.npm', false);
     grunt.config.set('release.options.github', false);
+    grunt.config.set('release.options.additionalFiles', ['test/fixtures/_bower.json']);
   });
 };
