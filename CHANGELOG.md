@@ -4,6 +4,7 @@
 * Fix `Cannot read property 'options' of undefined`
 * Prevent message when committing from stating `undefined`
 * Capitalize task description
+* allow Github authentication using a token
 
 ### v0.9.0 - 2014-12-02
 * Fix bugs related to `additionalFiles` option
