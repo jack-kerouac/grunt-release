@@ -155,7 +155,7 @@ module.exports = function(grunt){
         password = '';
       }
       else {
-        throw 'either github.usernameVar and github.passwordVar or github.accessTokenVar must be set';
+        grunt.fail.fatal('either github.usernameVar and github.passwordVar or github.accessTokenVar must be set');
       }
 
       if (nowrite){ 
